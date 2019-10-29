@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Card, Button } from "@material-ui/core";
 import Profile from "./Components/Profile";
-// import Profile from "./Components/Profile";
 import "./App.css";
 
 class App extends Component {
@@ -33,15 +33,25 @@ class App extends Component {
           profile={this.state.profile}
           loadFollowers={this.loadFollowers}
         />
-        {this.state.followers.map(item => (
-          <div key={item.id}>
-            <h3>{item.login}</h3>
-            <img src={item.avatar_url} alt={item.login} />
-            <a href={item.html_url} target="_blank" rel="noopener noreferrer">
-              View Profile
-            </a>
-          </div>
-        ))}
+
+        <div className="followers-card-container">
+          {this.state.followers.map(item => (
+            <Card key={item.id} className="custom-card-component">
+              <h1>{item.login}</h1>
+              <img src={item.avatar_url} alt={item.login} />
+              <br />
+              <Button
+                className="button button-spacing"
+                color="primary"
+                variant="contained"
+                href={item.html_url}
+                target="_blank"
+              >
+                View Profile
+              </Button>
+            </Card>
+          ))}
+        </div>
       </div>
     );
   }
